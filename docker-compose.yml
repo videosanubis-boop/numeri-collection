@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    container_name: numericollection
+    ports:
+      - "8000:8000"
+    volumes:
+      - db_data:/data
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=sqlite:////data/storage.db
+
+volumes:
+  db_data:

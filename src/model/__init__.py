@@ -1,9 +1,11 @@
+import os
 from typing import Annotated
 
 from fastapi import Depends
 from sqlmodel import Session, SQLModel, create_engine
 
-engine = create_engine("sqlite:///storage.db")
+_db_url = os.getenv("DATABASE_URL", "sqlite:///storage.db")
+engine = create_engine(_db_url)
 
 
 def get_session():
