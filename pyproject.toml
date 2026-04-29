@@ -1,0 +1,14 @@
+[tool.ruff]
+indent-width = 2
+
+[tool.pyright]
+include = ["src"]
+stubPath = "src"
+extraPaths = ["src"]
+
+typeCheckingMode = "basic"
+
+reportImplicitRelativeImport = "none"
+reportOperatorIssue = "none"
+reportArgumentType = "none"
+reportMissingTypeArgument = "none"

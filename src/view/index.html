@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <title>Numeri viewer</title>
+    </head>
+    <body>
+        <header>
+            <img src="logo.png" alt="Number Collection" class="header-logo" />
+            <div class="header-center">
+                <div id="total-price" class="collection-total">
+                    PREZZO COLLEZIONE 0.00 €
+                </div>
+            </div>
+            <div class="status-counters">
+                <span
+                    class="status-counter green"
+                    id="filter-green"
+                    title="Filtra: Presenti"
+                >
+                    <span class="status-dot green-dot"></span>
+                    <span id="count-green">0</span>
+                </span>
+                <span
+                    class="status-counter yellow"
+                    id="filter-yellow"
+                    title="Filtra: Da cambiare"
+                >
+                    <span class="status-dot yellow-dot"></span>
+                    <span id="count-yellow">0</span>
+                </span>
+                <span
+                    class="status-counter red"
+                    id="filter-red"
+                    title="Filtra: Mancanti"
+                >
+                    <span class="status-dot red-dot"></span>
+                    <span id="count-red">0</span>
+                </span>
+            </div>
+            <!-- Lucchetto -->
+            <button id="lock-btn" title="Sblocca modifiche">
+                <svg
+                    id="lock-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <!-- Lucchetto CHIUSO (default) -->
+                    <rect
+                        x="3"
+                        y="11"
+                        width="18"
+                        height="11"
+                        rx="2"
+                        ry="2"
+                    ></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </button>
+            <button id="card-create" class="locked-hidden">Add +</button>
+        </header>
+
+        <main id="card-list"></main>
+
+        <div id="modal-area" class="hidden">
+            <!-- Modal Password -->
+            <div id="modal-password" class="modal hidden">
+                <h1>🔒 Accesso Modifiche</h1>
+                <div class="modal-fields">
+                    <input
+                        id="password-input"
+                        type="password"
+                        placeholder="Inserisci la password"
+                        autocomplete="off"
+                    />
+                    <p id="password-error" class="password-error hidden">
+                        Password errata. Riprova.
+                    </p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="password-confirm">Sblocca</button>
+                    <button id="password-cancel">Annulla</button>
+                </div>
+            </div>
+
+            <!-- Modal Aggiungi -->
+            <div id="modal-card-create" class="modal hidden">
+                <h1>Aggiungi carta</h1>
+                <div class="modal-fields">
+                    <input
+                        id="card-create-input-name"
+                        type="text"
+                        placeholder="Il nome della carta"
+                    />
+                    <input
+                        id="card-create-input-code"
+                        type="text"
+                        placeholder="Codice (es: BLAR-IT046)"
+                    />
+                    <select id="card-create-select-rarity"></select>
+                    <select id="card-create-select-condition"></select>
+                    <select id="card-create-select-status">
+                        <option value="owned">🟢 Presente</option>
+                        <option value="to_replace">🟡 Da cambiare</option>
+                        <option value="missing">🔴 Mancante</option>
+                    </select>
+                    <input
+                        id="card-create-input-lang"
+                        type="text"
+                        placeholder="Esempio: IT"
+                        minlength="2"
+                        maxlength="2"
+                    />
+                    <input
+                        id="card-create-input-price"
+                        type="number"
+                        placeholder="10"
+                        min="0"
+                        step="0.01"
+                    />
+                    <input
+                        id="card-create-input-image"
+                        type="text"
+                        placeholder="URL dell'immagine (opzionale)"
+                    />
+                </div>
+                <div class="modal-buttons">
+                    <button id="card-create-confirm">Aggiungi</button>
+                    <button id="card-create-cancel">Annulla</button>
+                </div>
+            </div>
+
+            <!-- Modal Aggiorna -->
+            <div id="modal-card-update" class="modal hidden">
+                <h1>Aggiorna carta</h1>
+                <div class="modal-fields">
+                    <input
+                        id="card-update-input-name"
+                        type="text"
+                        placeholder="Il nome della carta"
+                    />
+                    <input
+                        id="card-update-input-code"
+                        type="text"
+                        placeholder="Codice (es: BLAR-IT046)"
+                    />
+                    <input
+                        id="card-update-input-order"
+                        type="number"
+                        placeholder="Posizione"
+                        min="0"
+                        step="1"
+                    />
+                    <select id="card-update-select-rarity"></select>
+                    <select id="card-update-select-condition"></select>
+                    <select id="card-update-select-status">
+                        <option value="owned">🟢 Presente</option>
+                        <option value="to_replace">🟡 Da cambiare</option>
+                        <option value="missing">🔴 Mancante</option>
+                    </select>
+                    <input
+                        id="card-update-input-lang"
+                        type="text"
+                        placeholder="Esempio: IT"
+                        minlength="2"
+                        maxlength="2"
+                    />
+                    <input
+                        id="card-update-input-price"
+                        type="number"
+                        placeholder="10"
+                        min="0"
+                        step="0.01"
+                    />
+                    <input
+                        id="card-update-input-image"
+                        type="text"
+                        placeholder="URL dell'immagine (opzionale)"
+                    />
+                </div>
+                <div class="modal-buttons">
+                    <button id="card-update-confirm">Aggiorna</button>
+                    <button id="card-update-cancel">Annulla</button>
+                </div>
+            </div>
+
+            <!-- Modal Elimina -->
+            <div id="modal-card-delete" class="modal hidden">
+                <h1>Rimozione carta</h1>
+                <p>
+                    Sei sicuro di voler rimuovere questa carta dalla tua
+                    collezione?
+                </p>
+                <div class="modal-fields"></div>
+                <div class="modal-buttons">
+                    <button id="card-delete-confirm">Rimuovi</button>
+                    <button id="card-delete-cancel">Annulla</button>
+                </div>
+            </div>
+
+            <!-- Modal Scambio Posizione -->
+            <div id="modal-card-swap" class="modal hidden">
+                <h1>Scambio posizione</h1>
+                <p id="swap-message">
+                    Esiste già una carta in questa posizione. Vuoi scambiarle?
+                </p>
+                <div class="modal-fields"></div>
+                <div class="modal-buttons">
+                    <button id="card-swap-confirm">Scambia</button>
+                    <button id="card-swap-cancel">Annulla</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="src/script.js"></script>
+    </body>
+</html>
