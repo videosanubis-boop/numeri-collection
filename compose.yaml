@@ -3,12 +3,11 @@ services:
     build: .
     container_name: numericollection
     ports:
-      - "8000:8000"
+      - "${APP_PORT:-8000}:8000"
     volumes:
-      - db_data:/data
+      - ./storage.db:/data/storage.db
     restart: unless-stopped
     environment:
       - DATABASE_URL=sqlite:////data/storage.db
 
-volumes:
-  db_data:
+volumes: {}
