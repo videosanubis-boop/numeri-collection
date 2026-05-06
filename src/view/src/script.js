@@ -191,10 +191,12 @@ function updateStatusCounters(cards) {
   const countGreen = document.getElementById("count-green");
   const countYellow = document.getElementById("count-yellow");
   const countRed = document.getElementById("count-red");
+  const countTotal = document.getElementById("count-total");
 
   if (countGreen) countGreen.textContent = greenCount;
   if (countYellow) countYellow.textContent = yellowCount;
   if (countRed) countRed.textContent = redCount;
+  if (countTotal) countTotal.textContent = greenCount + yellowCount;
 }
 
 function cardListRender(cards) {
