@@ -72,11 +72,12 @@ header > h1 {
     white-space: nowrap;
 }
 
+/* MODIFICATO: rimosso flex: 1 per non occupare spazio extra */
 .status-counters {
     display: flex;
     align-items: center;
     gap: 28px;
-    flex: 1;
+    flex: none;
     justify-content: center;
 }
 
@@ -574,6 +575,23 @@ main {
     transform: scale(1.05);
 }
 
+/* AGGIUNTO: divisore verticale tra i pallini e il totale */
+.status-counter-divider {
+    width: 2px;
+    height: 32px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* AGGIUNTO: etichetta "carte" dopo il numero totale */
+.count-total-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(247, 240, 240, 0.6);
+    margin-left: 4px;
+}
+
 @media (max-width: 1200px) {
     main {
         grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -640,15 +658,4 @@ main {
         padding: 12px;
         font-size: 0.9rem;
     }
-}
-
-.collection-count {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--fg-1);
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px 20px;
-    border-radius: 8px;
-    white-space: nowrap;
-    flex-shrink: 0;
 }
