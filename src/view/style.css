@@ -79,6 +79,7 @@ header > h1 {
     gap: 28px;
     flex: none;
     justify-content: center;
+    margin-right: 40px;
 }
 
 .status-counter {
